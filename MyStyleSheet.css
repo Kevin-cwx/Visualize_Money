@@ -1,0 +1,66 @@
+body {
+    background-color: #408d86;
+    --primary-color: #26A69A;
+    --secondary-color: #80CBC4;
+    --dark-accent: #263339;
+    font-family: 'Tiro Devanagari Sanskrit', sans-serif;
+}
+
+.BillsOfImage {
+
+    padding: 5px;
+    width: 140px;
+    object-fit: cover;
+
+    /* filter: contrast(1.2); */
+
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+.ImageWrapper {
+    background-color: var(--dark-accent);
+    display: inline-block;
+    padding: 10px;
+}
+
+#MainValue {
+    font-size: 60px;
+    background-color: var(--dark-accent);
+    display: inline-block;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: white;
+}
+
+.GeneralBorder {
+    border-radius: 10px;
+    border: 2px solid white;
+}
+
+.InputMainValue {
+    background-color: var(--secondary-color);
+    font-size: 60px;
+    width: 250px;
+    padding: 10px;
+
+
+}
+
+.InputMainValue::placeholder {
+    font-size: 45px;
+}
+
+#HeaderText {
+    font-size: 40px;
+}
+
+
+.hide {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
