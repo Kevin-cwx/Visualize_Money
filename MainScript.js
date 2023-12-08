@@ -1,8 +1,6 @@
 var log = console.log;
 var MainValue = 10;
 SetMainValue(MainValue);
-//log = function () { }
-
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -10,7 +8,7 @@ function numberWithCommas(x) {
 $("#MainValue").text('FL ' + MainValue);
 
 function SetMainValue(InputData) {
-    log(InputData)
+    log(InputData);
 
     $("#MainValue").text('FL ' + numberWithCommas(InputData));
     MainValue = InputData;
@@ -18,7 +16,7 @@ function SetMainValue(InputData) {
 
 }
 
-var BillsOf100, BillsOf50, BillsOf25, BillsOf10, BillsOf5, BillsOf1 =0
+var BillsOf100, BillsOf50, BillsOf25, BillsOf10, BillsOf5, BillsOf1 = 0
 
 function PerformCalculations() {
 
@@ -26,9 +24,9 @@ function PerformCalculations() {
     BillsOf50 = Math.floor((MainValue - (BillsOf100 * 100)) / 50);
     BillsOf25 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50)) / 25);
     BillsOf10 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50) - (BillsOf25 * 25)) / 10);
-    BillsOf5 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50) - (BillsOf25 * 25) - (BillsOf10 * 10)) / 5);    
+    BillsOf5 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50) - (BillsOf25 * 25) - (BillsOf10 * 10)) / 5);
     BillsOf1 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50) - (BillsOf25 * 25) - (BillsOf10 * 10) - (BillsOf5 * 5)) / 1);
-    
+
     log("Main Value: " + MainValue + "\n\n\n\n")
     log("Bills of 100: " + BillsOf100)
     log("Bills of 50: " + BillsOf50)
@@ -61,9 +59,6 @@ function PrintN_Times(AmountOfTimes, BillType) {
     }
 }
 
-
-
-
 function PrintAllBills() {
     $(".ImageWrapper").empty();
 
@@ -77,8 +72,7 @@ function PrintAllBills() {
 
 document.getElementById("InputFieldMainValueID").focus();
 
-
-//Keeps focus in Inout field
+//Keeps focus in input field
 document.getElementById('InputFieldMainValueID').onblur = function (event) {
     var blurEl = this;
     setTimeout(function () {

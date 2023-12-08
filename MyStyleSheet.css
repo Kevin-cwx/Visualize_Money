@@ -7,8 +7,8 @@ body {
 }
 
 .BillsOfImage {
-    /*Was 5px padding */
-    padding: 10px;
+    
+    padding: 5px;
     width: 140px;
     object-fit: cover;
 
