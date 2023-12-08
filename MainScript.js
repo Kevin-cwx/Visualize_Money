@@ -57,7 +57,7 @@ function PerformCalculations() {
 function PrintN_Times(AmountOfTimes, BillType) {
     for (let index = 0; index < AmountOfTimes; index++) {
 
-        $(".ImageWrapper").append('<img title="BillOfImage" class="BillsOfImage" src=/Media/FL' + BillType + '.png>')
+        $(".ImageWrapper").append('<img title="BillOfImage" class="BillsOfImage" src=../Media/FL' + BillType + '.png>')
     }
 }
 
