@@ -37,7 +37,7 @@ body {
     color: white;
 }
 
-.GeneralBorder {
+.General_Border {
     border-radius: 10px;
     border: 2px solid white;
 }
@@ -64,4 +64,9 @@ body {
     position: absolute !important;
     top: -9999px !important;
     left: -9999px !important;
+}
+
+
+#Dice{
+    height:100px;
 }
