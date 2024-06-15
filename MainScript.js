@@ -1,19 +1,19 @@
 var log = console.log;
 var MainValue = 10;
 SetMainValue(MainValue);
+var InputFieldMainValueID = document.getElementById('InputFieldMainValueID');
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
 $("#MainValue").text('FL ' + MainValue);
 
 function SetMainValue(InputData) {
     log(InputData);
-
     $("#MainValue").text('FL ' + numberWithCommas(InputData));
     MainValue = InputData;
     PerformCalculations();
-
 }
 
 var BillsOf100, BillsOf50, BillsOf25, BillsOf10, BillsOf5, BillsOf1 = 0
@@ -47,7 +47,7 @@ function PerformCalculations() {
         PrintAllBills();
     }
 
-    setTimeout(timeoutHandler, 250)
+    setTimeout(timeoutHandler, 150)
 
 }
 
@@ -55,7 +55,7 @@ function PerformCalculations() {
 function PrintN_Times(AmountOfTimes, BillType) {
     for (let index = 0; index < AmountOfTimes; index++) {
 
-        $(".ImageWrapper").append('<img title="BillOfImage" class="BillsOfImage" src=../Media/FL' + BillType + '.png>')
+        $(".ImageWrapper").append('<img class="BillsOfImage" src=../Media/Bills/FL' + BillType + '.png>')
     }
 }
 
@@ -70,12 +70,29 @@ function PrintAllBills() {
     PrintN_Times(BillsOf100, 100)
 }
 
-document.getElementById("InputFieldMainValueID").focus();
+InputFieldMainValueID.focus();
 
 //Keeps focus in input field
-document.getElementById('InputFieldMainValueID').onblur = function (event) {
+InputFieldMainValueID.onblur = function (event) {
     var blurEl = this;
     setTimeout(function () {
         blurEl.focus()
     }, 10);
 };
+
+//allows for only numeric input
+InputFieldMainValueID.onkeypress = function (event) {
+    return event.charCode >= 48 && event.charCode <= 57;
+};
+
+//Changes value on input
+InputFieldMainValueID.oninput = function () {
+    SetMainValue(InputFieldMainValueID.value);
+};
+
+//Disables multiple zeros. Ex 00000
+InputFieldMainValueID.addEventListener("input", function () {
+    if (this.value.length === 1 && this.value === "0") {
+        this.value = "";
+    }
+});
