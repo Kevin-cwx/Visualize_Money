@@ -51,11 +51,33 @@ function PerformCalculations() {
 
 }
 
+/* Toggle */
+const toggle = document.getElementById('toggle');
+const statusText = document.getElementById('status');
+
+// Function to update the status text based on toggle state
+function updateStatus() {
+    if (toggle.checked) {
+       log('New_Bills');
+       Folder_Name = "New_Bills"
+    } else {
+        log('Old_Bills');
+        Folder_Name = "Bills"
+    }
+    PerformCalculations();
+}
+
+// Event listener to detect changes in toggle state
+toggle.addEventListener('change', updateStatus);
+
+// Initial status update
+updateStatus();
 /* */
+//Folder_Name = "New_Bills"
 function PrintN_Times(AmountOfTimes, BillType) {
     for (let index = 0; index < AmountOfTimes; index++) {
 
-        $(".ImageWrapper").append('<img class="BillsOfImage" src=../Media/Bills/FL' + BillType + '.png>')
+        $(".ImageWrapper").append('<img class="BillsOfImage" src=../Media/'+Folder_Name+'/FL' + BillType + '.png>')
     }
 }
 
