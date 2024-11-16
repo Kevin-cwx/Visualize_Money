@@ -1,3 +1,8 @@
 Features
 -Add XCG logic
 -Randomize bill showings
+
+Fix
+Toggle switch CSS
+    add general border
+    Give same radius as other divs 

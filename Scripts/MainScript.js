@@ -72,8 +72,8 @@ toggle.addEventListener('change', updateStatus);
 
 // Initial status update
 updateStatus();
-/* */
-//Folder_Name = "New_Bills"
+
+
 function PrintN_Times(AmountOfTimes, BillType) {
     for (let index = 0; index < AmountOfTimes; index++) {
 
