@@ -1,0 +1,3 @@
+Features
+-Add XCG logic
+-Randomize bill showings
