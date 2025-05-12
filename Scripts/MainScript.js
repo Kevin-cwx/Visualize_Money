@@ -1,7 +1,14 @@
 var log = console.log;
 var MainValue = 10;
-SetMainValue(MainValue);
+
 var InputFieldMainValueID = document.getElementById('InputFieldMainValueID');
+
+const denominations = {
+    FL: [100, 50, 25, 10, 5, 1],
+    XCG: [200, 100, 50, 20, 10, 5, 1]
+};
+let currentCurrency = "FL"; // default
+
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -11,44 +18,59 @@ $("#MainValue").text('FL ' + MainValue);
 
 function SetMainValue(InputData) {
     log(InputData);
-    $("#MainValue").text('FL ' + numberWithCommas(InputData));
+    $("#MainValue").text(currentCurrency + ' ' + numberWithCommas(InputData));
     MainValue = InputData;
     PerformCalculations();
 }
 
 var BillsOf100, BillsOf50, BillsOf25, BillsOf10, BillsOf5, BillsOf1 = 0
 
-function PerformCalculations() {
+function getRandomBreakdown(amount, availableDenoms) {
+    const result = {};
+    let remaining = amount;
 
-    BillsOf100 = Math.floor(MainValue / 100);
-    BillsOf50 = Math.floor((MainValue - (BillsOf100 * 100)) / 50);
-    BillsOf25 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50)) / 25);
-    BillsOf10 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50) - (BillsOf25 * 25)) / 10);
-    BillsOf5 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50) - (BillsOf25 * 25) - (BillsOf10 * 10)) / 5);
-    BillsOf1 = Math.floor(((MainValue - (BillsOf100 * 100)) - (BillsOf50 * 50) - (BillsOf25 * 25) - (BillsOf10 * 10) - (BillsOf5 * 5)) / 1);
+    while (remaining > 0) {
+        const validDenoms = availableDenoms.filter(d => d <= remaining);
+        const randomDenom = validDenoms[Math.floor(Math.random() * validDenoms.length)];
 
-    log("Main Value: " + MainValue + "\n\n\n\n")
-    log("Bills of 100: " + BillsOf100)
-    log("Bills of 50: " + BillsOf50)
-    log("Bills of 25: " + BillsOf25)
-    log("Bills of 10: " + BillsOf10)
-    log("Bills of 5: " + BillsOf5)
-    log("Bills of 1: " + BillsOf1)
-
-    log("\n\nSum of Bills: " + Number(BillsOf100 * 100 + BillsOf50 * 50 + BillsOf25 * 25 + BillsOf10 * 10 + BillsOf5 * 5 + BillsOf1 * 1));
-    //PrintAllBills();
-
-
-    const sleep = (s) =>
-        new Promise((p) => setTimeout(p, (s * 250) | 0))
-
-    async function timeoutHandler() {
-        await sleep(1)
-        PrintAllBills();
+        if (!result[randomDenom]) result[randomDenom] = 0;
+        result[randomDenom]++;
+        remaining -= randomDenom;
     }
 
-    setTimeout(timeoutHandler, 150)
+    return result;
+}
 
+
+function PerformCalculations() {
+    let bills = {};
+    const denomList = denominations[currentCurrency];
+
+    // 🔥 Use randomized breakdown for FL, traditional for XCG
+    if (currentCurrency === "FL") {
+        bills = getRandomBreakdown(MainValue, denomList);
+    } else {
+        let remaining = MainValue;
+        denomList.forEach(denom => {
+            bills[denom] = Math.floor(remaining / denom);
+            remaining -= bills[denom] * denom;
+        });
+    }
+
+    log(`Main Value: ${MainValue} (${currentCurrency})`);
+    denomList.forEach(d => {
+        if (bills[d]) log(`Bills of ${d}: ${bills[d]}`);
+    });
+
+    const total = Object.entries(bills).reduce((sum, [k, v]) => sum + (k * v), 0);
+    log(`\nSum of Bills: ${total}`);
+
+    // 💾 Store globally for rendering
+    window.currentBills = bills;
+
+    setTimeout(() => {
+        PrintAllBills();
+    }, 150);
 }
 
 /* Toggle */
@@ -58,12 +80,18 @@ const statusText = document.getElementById('status');
 // Function to update the status text based on toggle state
 function updateStatus() {
     if (toggle.checked) {
-       log('New_Bills');
-       Folder_Name = "New_Bills"
+        log('New_Bills');
+        Folder_Name = "New_Bills";
+        currentCurrency = "XCG";
     } else {
         log('Old_Bills');
-        Folder_Name = "Bills"
+        Folder_Name = "Bills";
+        currentCurrency = "FL";
     }
+
+    // 🔥 Update the currency label immediately
+    $("#MainValue").text(currentCurrency + ' ' + numberWithCommas(MainValue)); // ⬅️ NEW LINE
+
     PerformCalculations();
 }
 
@@ -76,20 +104,19 @@ updateStatus();
 
 function PrintN_Times(AmountOfTimes, BillType) {
     for (let index = 0; index < AmountOfTimes; index++) {
-
-        $(".ImageWrapper").append('<img class="BillsOfImage" src=../Media/'+Folder_Name+'/FL' + BillType + '.png>')
+        $(".ImageWrapper").append(
+            '<img class="BillsOfImage" src=../Media/' + Folder_Name + '/'+currentCurrency + BillType + '.png>'
+        );
     }
 }
 
 function PrintAllBills() {
     $(".ImageWrapper").empty();
+    const bills = window.currentBills;
 
-    PrintN_Times(BillsOf1, 1)
-    PrintN_Times(BillsOf5, 5)
-    PrintN_Times(BillsOf10, 10)
-    PrintN_Times(BillsOf25, 25)
-    PrintN_Times(BillsOf50, 50)
-    PrintN_Times(BillsOf100, 100)
+    for (const denom in bills) {
+        PrintN_Times(bills[denom], denom);
+    }
 }
 
 InputFieldMainValueID.focus();
@@ -118,3 +145,16 @@ InputFieldMainValueID.addEventListener("input", function () {
         this.value = "";
     }
 });
+
+//Randomize bill selection breakdown
+document.getElementById('Dice').addEventListener('click', function () {
+    if (currentCurrency === 'FL') {
+        log("🎲 Dice clicked — performing random breakdown for FL");
+        PerformCalculations(); // Re-perform with new random breakdown for FL
+    } else if (currentCurrency === 'XCG') {
+        log("🎲 Dice clicked — performing random breakdown for XCG");
+        PerformCalculations(); // Re-perform with new breakdown for XCG
+    }
+});
+
+SetMainValue(MainValue);

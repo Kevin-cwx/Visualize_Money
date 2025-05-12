@@ -1,8 +1,9 @@
-/* */
+/* Toggle Modernization */
 .toggle-switch {
     position: relative;
     width: 60px;
-    height: 30px;
+    height: 31px;
+    margin: 5px auto;
 }
 
 .toggle-input {
@@ -10,31 +11,44 @@
 }
 
 .toggle-label {
-    position: absolute;
+    display: block;
     width: 100%;
     height: 100%;
-    background-color: white;
-    border-radius: 40px;
-    cursor:default;
-    transition: background-color 0.3s;
+    background-color: #ffffff;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .toggle-label::before {
     content: "";
     position: absolute;
+    top: 4px;
+    left: 4px;
     width: 26px;
     height: 26px;
     background-color: var(--primary-color);
-    border-radius: 10px;
-    top: 2px;
-    left: 2px;
-    transition: transform 0.3s;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
 }
 
-.toggle-input:checked + .toggle-label {
+.toggle-input:checked+.toggle-label {
     background-color: var(--dark-accent);
 }
 
-.toggle-input:checked + .toggle-label::before {
-    transform: translateX(30px);
+.toggle-input:checked+.toggle-label::before {
+    transform: translateX(26px);
+}
+
+
+
+.hide {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
+
+#Dice {
+    height: 100px;
 }
