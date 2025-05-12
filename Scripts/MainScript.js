@@ -25,13 +25,27 @@ function SetMainValue(InputData) {
 
 var BillsOf100, BillsOf50, BillsOf25, BillsOf10, BillsOf5, BillsOf1 = 0
 
+// Updated random breakdown logic
 function getRandomBreakdown(amount, availableDenoms) {
     const result = {};
     let remaining = amount;
 
+    // Calculate total denomination sum (to bias the randomness)
+    const totalDenoms = availableDenoms.reduce((sum, denom) => sum + denom, 0);
+
+    // Modify the selection process to favor larger denominations
     while (remaining > 0) {
-        const validDenoms = availableDenoms.filter(d => d <= remaining);
-        const randomDenom = validDenoms[Math.floor(Math.random() * validDenoms.length)];
+        const weightedDenoms = availableDenoms.map(denom => {
+            const weight = Math.max(1, Math.min(remaining / totalDenoms, 1));  // Give larger denominations a higher weight
+            return { denom, weight };
+        });
+
+        // Sort denominations by weight, higher weight first
+        weightedDenoms.sort((a, b) => b.weight - a.weight);
+
+        // Pick a random denomination based on weighted likelihood
+        const validDenoms = weightedDenoms.filter(d => d.denom <= remaining);
+        const randomDenom = validDenoms[Math.floor(Math.random() * validDenoms.length)].denom;
 
         if (!result[randomDenom]) result[randomDenom] = 0;
         result[randomDenom]++;
@@ -46,16 +60,8 @@ function PerformCalculations() {
     let bills = {};
     const denomList = denominations[currentCurrency];
 
-    // 🔥 Use randomized breakdown for FL, traditional for XCG
-    if (currentCurrency === "FL") {
-        bills = getRandomBreakdown(MainValue, denomList);
-    } else {
-        let remaining = MainValue;
-        denomList.forEach(denom => {
-            bills[denom] = Math.floor(remaining / denom);
-            remaining -= bills[denom] * denom;
-        });
-    }
+    // 🔥 Use randomized breakdown for both FL and XCG
+    bills = getRandomBreakdown(MainValue, denomList);
 
     log(`Main Value: ${MainValue} (${currentCurrency})`);
     denomList.forEach(d => {
@@ -105,7 +111,7 @@ updateStatus();
 function PrintN_Times(AmountOfTimes, BillType) {
     for (let index = 0; index < AmountOfTimes; index++) {
         $(".ImageWrapper").append(
-            '<img class="BillsOfImage" src=../Media/' + Folder_Name + '/'+currentCurrency + BillType + '.png>'
+            '<img class="BillsOfImage" src=../Media/' + Folder_Name + '/' + currentCurrency + BillType + '.png>'
         );
     }
 }
@@ -148,13 +154,8 @@ InputFieldMainValueID.addEventListener("input", function () {
 
 //Randomize bill selection breakdown
 document.getElementById('Dice').addEventListener('click', function () {
-    if (currentCurrency === 'FL') {
-        log("🎲 Dice clicked — performing random breakdown for FL");
-        PerformCalculations(); // Re-perform with new random breakdown for FL
-    } else if (currentCurrency === 'XCG') {
-        log("🎲 Dice clicked — performing random breakdown for XCG");
-        PerformCalculations(); // Re-perform with new breakdown for XCG
-    }
+    log("🎲 Dice clicked — performing random breakdown for " + currentCurrency);
+    PerformCalculations(); // Re-perform with new breakdown
 });
 
 SetMainValue(MainValue);
