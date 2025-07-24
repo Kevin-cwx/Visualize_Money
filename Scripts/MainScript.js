@@ -1,5 +1,5 @@
 var log = console.log;
-var MainValue = 10;
+var MainValue = 25;
 
 var InputFieldMainValueID = document.getElementById('InputFieldMainValueID');
 
@@ -7,7 +7,7 @@ const denominations = {
     FL: [100, 50, 25, 10, 5, 1],
     XCG: [200, 100, 50, 20, 10, 5, 1]
 };
-let currentCurrency = "FL"; // default
+let currentCurrency = "XCG"; // default
 
 
 function numberWithCommas(x) {
