@@ -29,23 +29,22 @@ var BillsOf100, BillsOf50, BillsOf25, BillsOf10, BillsOf5, BillsOf1 = 0
 function getRandomBreakdown(amount, availableDenoms) {
     const result = {};
     let remaining = amount;
+    const isFL = currentCurrency === "FL";
 
-    // Calculate total denomination sum (to bias the randomness)
-    const totalDenoms = availableDenoms.reduce((sum, denom) => sum + denom, 0);
-
-    // Modify the selection process to favor larger denominations
     while (remaining > 0) {
-        const weightedDenoms = availableDenoms.map(denom => {
-            const weight = Math.max(1, Math.min(remaining / totalDenoms, 1));  // Give larger denominations a higher weight
-            return { denom, weight };
-        });
+        // Filter denominations that are less than or equal to what's left
+        let validDenoms = availableDenoms.filter(d => d <= remaining);
 
-        // Sort denominations by weight, higher weight first
-        weightedDenoms.sort((a, b) => b.weight - a.weight);
+        // For FL, avoid 1 and 5 unless absolutely necessary
+        if (isFL) {
+            const nonCoinDenoms = validDenoms.filter(d => d > 5);
+            if (nonCoinDenoms.length > 0) {
+                validDenoms = nonCoinDenoms;
+            }
+        }
 
-        // Pick a random denomination based on weighted likelihood
-        const validDenoms = weightedDenoms.filter(d => d.denom <= remaining);
-        const randomDenom = validDenoms[Math.floor(Math.random() * validDenoms.length)].denom;
+        // Randomly select one from the filtered valid denominations
+        const randomDenom = validDenoms[Math.floor(Math.random() * validDenoms.length)];
 
         if (!result[randomDenom]) result[randomDenom] = 0;
         result[randomDenom]++;
@@ -54,6 +53,7 @@ function getRandomBreakdown(amount, availableDenoms) {
 
     return result;
 }
+
 
 
 function PerformCalculations() {
