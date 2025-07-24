@@ -17,3 +17,9 @@ This is a web tool that takes a monetary value and breaks it down into individua
 
 
 ![FL Currency](https://www.global-currency.com/currency-news/s-l1200.jpg)
+
+
+<p float="left">
+  <img src="https://www.global-currency.com/currency-news/cbcs-reveal-of-the-caribbean-guilder-frame-at-1m22ss.jpg" alt="XCG Currency" width="300" />
+  <img src="https://www.global-currency.com/currency-news/s-l1200.jpg" alt="FL Currency" width="300" />
+</p>
