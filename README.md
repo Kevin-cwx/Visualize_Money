@@ -20,6 +20,6 @@ This is a web tool that takes a monetary value and breaks it down into individua
 
 
 <p float="left">
-  <img src="https://www.global-currency.com/currency-news/cbcs-reveal-of-the-caribbean-guilder-frame-at-1m22ss.jpg" alt="XCG Currency" width="300" />
-  <img src="https://www.global-currency.com/currency-news/s-l1200.jpg" alt="FL Currency" width="300" />
+  <img src="https://www.global-currency.com/currency-news/cbcs-reveal-of-the-caribbean-guilder-frame-at-1m22ss.jpg" alt="XCG Currency" height="200" style="object-fit: contain; margin-right: 10px;" />
+  <img src="https://www.global-currency.com/currency-news/s-l1200.jpg" alt="FL Currency" height="200" style="object-fit: contain;" />
 </p>
