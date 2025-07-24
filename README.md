@@ -13,13 +13,7 @@ This is a web tool that takes a monetary value and breaks it down into individua
 
 >As of March 31, 2025, Curacao and Sint Maarten will switch to the Caribbean Guilder (XCG) as their official currency. This will replace the current Netherlands Antilles Guilder (ANG), which has been in use for decades.
 
-![XCG Currency](https://www.global-currency.com/currency-news/cbcs-reveal-of-the-caribbean-guilder-frame-at-1m22ss.jpg)
-
-
-![FL Currency](https://www.global-currency.com/currency-news/s-l1200.jpg)
-
-
 <p float="left">
-  <img src="https://www.global-currency.com/currency-news/cbcs-reveal-of-the-caribbean-guilder-frame-at-1m22ss.jpg" alt="XCG Currency" height="200" style="object-fit: contain; margin-right: 10px;" />
-  <img src="https://www.global-currency.com/currency-news/s-l1200.jpg" alt="FL Currency" height="200" style="object-fit: contain;" />
+  <img src="https://www.global-currency.com/currency-news/cbcs-reveal-of-the-caribbean-guilder-frame-at-1m22ss.jpg" alt="XCG Currency" height="400" style="object-fit: contain; margin-right: 10px;" />
+  <img src="https://www.global-currency.com/currency-news/s-l1200.jpg" alt="FL Currency" height="400" style="object-fit: contain;" />
 </p>
