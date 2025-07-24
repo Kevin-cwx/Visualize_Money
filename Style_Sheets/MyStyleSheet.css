@@ -17,7 +17,8 @@ body {
 /* ✨ Modernized bill images */
 .BillsOfImage {
   padding: 8px;
-  width: 180px;
+  height: 100px; 
+  width: auto;
   object-fit: cover;
   transition: transform 0.5s ease;
   user-select: none;
@@ -75,7 +76,7 @@ body {
 
 #HeaderText {
   font-size: 50px;
-  font-weight: 600;
+  font-weight: 400;
   margin-top: 10px;
   text-align: center;
   color: white;

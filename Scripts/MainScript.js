@@ -7,14 +7,12 @@ const denominations = {
     FL: [100, 50, 25, 10, 5, 1],
     XCG: [200, 100, 50, 20, 10, 5, 1]
 };
-let currentCurrency = "XCG"; // default
+let currentCurrency = "XCG"; 
 
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
-
-$("#MainValue").text('FL ' + MainValue);
 
 function SetMainValue(InputData) {
     log(InputData);
@@ -22,8 +20,6 @@ function SetMainValue(InputData) {
     MainValue = InputData;
     PerformCalculations();
 }
-
-var BillsOf100, BillsOf50, BillsOf25, BillsOf10, BillsOf5, BillsOf1 = 0
 
 // Updated random breakdown logic
 function getRandomBreakdown(amount, availableDenoms) {
@@ -60,7 +56,7 @@ function PerformCalculations() {
     let bills = {};
     const denomList = denominations[currentCurrency];
 
-    // 🔥 Use randomized breakdown for both FL and XCG
+    // Use randomized breakdown for both FL and XCG
     bills = getRandomBreakdown(MainValue, denomList);
 
     log(`Main Value: ${MainValue} (${currentCurrency})`);
@@ -71,7 +67,7 @@ function PerformCalculations() {
     const total = Object.entries(bills).reduce((sum, [k, v]) => sum + (k * v), 0);
     log(`\nSum of Bills: ${total}`);
 
-    // 💾 Store globally for rendering
+    // Store globally for rendering
     window.currentBills = bills;
 
     setTimeout(() => {
@@ -95,8 +91,8 @@ function updateStatus() {
         currentCurrency = "FL";
     }
 
-    // 🔥 Update the currency label immediately
-    $("#MainValue").text(currentCurrency + ' ' + numberWithCommas(MainValue)); // ⬅️ NEW LINE
+    // Update the currency label immediately
+    $("#MainValue").text(currentCurrency + ' ' + numberWithCommas(MainValue));
 
     PerformCalculations();
 }
