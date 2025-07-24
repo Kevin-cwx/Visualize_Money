@@ -1,5 +1,17 @@
-Takes a number as input and shows that number as currency with accompanied images. 
-Ex. 10 -> FL 10 AND 10 guilder bill
+# Money Visualizer
 
-* Able to show any number. 
-* Not including cents.
+This is a web tool that takes a monetary value and breaks it down into individual bills or coins, depending on the selected currency. It updates visually and interactively, making it easy to understand how that amount is made up using real-world denominations.
+
+## How to Use
+
+1.  Enter a monetary value in the input field.
+2.  Use the toggle switch to select between FL and XCG currencies.
+3.  Observe the dynamic visual representation of the money.
+4.  Click the dice button to randomize the bill and coin breakdown.
+
+## Information
+
+>As of March 31, 2025, Curacao and Sint Maarten will switch to the Caribbean Guilder (XCG) as their official currency. This will replace the current Netherlands Antilles Guilder (ANG), which has been in use for decades. - Centrale Bank
+
+![FL Currency](ReadMe Images/FL.png)
+![XCG Currency](ReadMe Images/XCG.png)
