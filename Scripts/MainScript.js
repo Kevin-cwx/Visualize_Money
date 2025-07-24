@@ -1,5 +1,5 @@
 var log = console.log;
-var MainValue = 25;
+var MainValue = 1;
 
 var InputFieldMainValueID = document.getElementById('InputFieldMainValueID');
 
