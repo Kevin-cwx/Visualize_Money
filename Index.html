@@ -19,18 +19,22 @@
   <body>
     <div id="HeaderText">Money Visualizer</div>
     <div class="ValueAndDiceContainer">
-      <div class="General_Border" id="MainValue"></div>
+      <div style="position: relative; display: flex; align-items: center; justify-content: center;">
+        <div class="General_Border" id="MainValue"></div>
+        <input
+          type="number"
+          pattern="[0-9]*"
+          inputmode="numeric"
+          id="InputFieldMainValueID"
+          placeholder="Type Here..."
+          class="InputMainValue General_Border hide" />
+      </div>
 
       <img
         src="../Media/Other/Dice.png"
         class="General_Border DiceStyled"
         id="Dice" />
     </div>
-    <input
-      type="number"
-      id="InputFieldMainValueID"
-      placeholder="Type Here..."
-      class="InputMainValue General_Border hide" />
     <div class="toggle-switch">
       <!-- Add to class: General_Border-->
       <input type="checkbox" id="toggle" class="toggle-input" checked />
