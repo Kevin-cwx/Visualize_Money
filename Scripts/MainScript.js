@@ -121,7 +121,18 @@ function PrintAllBills() {
     }
 }
 
-InputFieldMainValueID.focus();
+const MainValueDisplay = document.getElementById('MainValue');
+const mobileViewport = window.matchMedia('(max-width: 767px)');
+
+if (!mobileViewport.matches) {
+    InputFieldMainValueID.focus();
+}
+
+MainValueDisplay.addEventListener('click', function () {
+    if (mobileViewport.matches) {
+        InputFieldMainValueID.focus();
+    }
+});
 
 //Keeps focus in input field
 InputFieldMainValueID.onblur = function (event) {

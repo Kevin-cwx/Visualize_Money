@@ -90,7 +90,7 @@ body {
 
 #Dice,
 .DiceStyled {
-  height: 100px;
+  height: 60px;
   border-radius: 12px;
   transition: transform 0.2s ease;
   user-select: none;
@@ -106,8 +106,4 @@ body {
     position: absolute !important;
     top: -9999px !important;
     left: -9999px !important;
-}
-
-#Dice {
-    height: 100px;
 }
