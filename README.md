@@ -1,5 +1,7 @@
 # Money Visualizer
 
+https://visualizemoney.netlify.app/
+
 This is a web tool that takes a monetary value and breaks it down into individual bills or coins, depending on the selected currency. It updates visually and interactively, making it easy to understand how that amount is made up using real-world denominations.
 
 ## How to Use
