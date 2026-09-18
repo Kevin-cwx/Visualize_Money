@@ -19,3 +19,7 @@ This is a web tool that takes a monetary value and breaks it down into individua
   <img src="https://www.global-currency.com/currency-news/cbcs-reveal-of-the-caribbean-guilder-frame-at-1m22ss.jpg" alt="XCG Currency" height="300" style="object-fit: contain; margin-right: 10px;" />
   <img src="https://www.global-currency.com/currency-news/s-l1200.jpg" alt="FL Currency" height="300" style="object-fit: contain;" />
 </p>
+
+
+<br>
+<img width="1920" height="683" alt="image" src="https://github.com/user-attachments/assets/f66f7b1c-ea6d-4d4f-bc05-63e9ec5b519b" />
